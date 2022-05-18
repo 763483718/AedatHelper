@@ -26,8 +26,17 @@ struct DataSet {
     char line[256];
 
     fs.open(labels_filename, std::fstream::in);
+
+    if(!fs)
+    {
+      std::cout << "error in opening the file:\t" << labels_filename << std::endl;
+      return;
+    }
+
     fs.getline(line, 256);
     std::vector<Row> rows;
+
+    // std::cout << __func__ << " begin to read csv" << std::endl;
 
     while (!fs.eof()) {
       Row row;
@@ -40,9 +49,12 @@ struct DataSet {
       rows.push_back(row);
     }
     rows.pop_back();
+    // std::cout << __func__ << " end read csv" << std::endl;
 
     AEDAT data;
+    // std::cout << __func__ << " begin to load" << std::endl;
     data.load(aedat_filename);
+    // std::cout << __func__ << " end load" << std::endl;
 
     size_t event_idx = 0;
     for (size_t row_idx = 0; row_idx < rows.size(); row_idx++) {

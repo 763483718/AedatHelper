@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <vector>
 
+
 struct AEDAT {
   enum class EventType : uint16_t {
     SPECIAL_EVENT = 0,
